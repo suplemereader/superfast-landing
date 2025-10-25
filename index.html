@@ -1,260 +1,1009 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Essential Meta -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Build blazing-fast modern websites with zero dependencies. Clean design, responsive, and optimized for SEO and speed." />
-  <meta name="author" content="SuperFast" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michelle Blake Yoga - Transform Your Body & Mind</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- SEO -->
-  <title>Blazing Fast Landing Page</title>
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://yourdomain.com/" />
+        :root {
+            --neon-blue: #00d9ff;
+            --neon-cyan: #6fc3df;
+            --neon-orange: #ff6b35;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050814;
+            --grid-color: rgba(0, 217, 255, 0.2);
+            --glow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+        }
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="SuperFast — Blazing Fast Landing Page" />
-  <meta property="og:description" content="Experience instant page loads with this ultra-optimized static landing page template. No frameworks, no lag — just speed." />
-  <meta property="og:url" content="https://yourdomain.com/" />
-  <meta property="og:image" content="https://yourdomain.com/preview.jpg" />
-  <meta property="og:site_name" content="SuperFast" />
+        body {
+            font-family: 'Courier New', 'Rajdhani', -apple-system, monospace;
+            line-height: 1.6;
+            color: var(--neon-cyan);
+            overflow-x: hidden;
+            background: var(--dark-bg);
+            position: relative;
+        }
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SuperFast — Blazing Fast Landing Page" />
-  <meta name="twitter:description" content="Build lightning-fast websites with zero dependencies. Pure performance, pure design." />
-  <meta name="twitter:image" content="https://yourdomain.com/preview.jpg" />
+        /* Animated Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(180deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" />
+        @keyframes gridMove {
+            0% {
+                transform: perspective(500px) rotateX(60deg) translateY(0);
+            }
+            100% {
+                transform: perspective(500px) rotateX(60deg) translateY(50px);
+            }
+        }
 
-  <!-- Schema.org JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "SuperFast",
-    "url": "https://yourdomain.com/",
-    "logo": "https://yourdomain.com/logo.png",
-    "description": "SuperFast helps you build lightning-fast, modern, and responsive websites optimized for SEO and performance.",
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "contactType": "customer support",
-      "email": "support@yourdomain.com",
-      "url": "https://yourdomain.com/#contact"
-    }],
-    "sameAs": [
-      "https://twitter.com/yourprofile",
-      "https://facebook.com/yourprofile",
-      "https://linkedin.com/company/yourprofile"
-    ]
-  }
-  </script>
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(5, 8, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+            z-index: 1000;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
 
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #222;
-      --accent: #007aff;
-      --radius: 1rem;
-    }
+        .sticky-nav.visible {
+            transform: translateY(0);
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        .nav-logo {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
 
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      scroll-behavior: smooth;
-    }
+        .nav-cta {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            color: var(--neon-blue);
+            text-decoration: none;
+            border: 2px solid var(--neon-blue);
+            border-radius: 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    header {
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 10;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-blue);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
 
-    header h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
+        .nav-cta:hover::before {
+            left: 0;
+        }
 
-    nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      transition: color 0.2s;
-    }
+        .nav-cta:hover {
+            color: var(--dark-bg);
+            box-shadow: var(--glow);
+        }
 
-    nav a:hover {
-      color: var(--accent);
-    }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
 
-    .hero {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 5rem 1rem;
-      background: linear-gradient(180deg, #f9fafc 0%, #ffffff 100%);
-    }
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
 
-    .hero h2 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 1rem;
-    }
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
 
-    .hero p {
-      font-size: 1.125rem;
-      max-width: 600px;
-      color: #555;
-      margin-bottom: 2rem;
-    }
+        .logo-container {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 3rem;
+            position: relative;
+            animation: logoGlow 2s ease-in-out infinite;
+        }
 
-    .btn {
-      background: var(--accent);
-      color: #fff;
-      padding: 0.9rem 2rem;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s ease-in-out;
-      text-decoration: none;
-      display: inline-block;
-    }
+        @keyframes logoGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px var(--neon-blue));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px var(--neon-blue)) drop-shadow(0 0 60px var(--neon-cyan));
+            }
+        }
 
-    .btn:hover {
-      background: #005fcc;
-    }
+        .logo {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+        }
 
-    /* Contact Section */
-    .contact {
-      padding: 4rem 5%;
-      background: #f8f9fb;
-      text-align: center;
-    }
+        .hero-questions {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--glow);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
 
-    .contact h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
 
-    .contact p {
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      color: #555;
-    }
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--neon-cyan);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.7s forwards;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-     {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+        .credentials {
+            font-size: 0.9rem;
+            color: var(--neon-orange);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.9s forwards;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-    input,
-    textarea {
-      padding: 0.9rem;
-      border: 1px solid #ccc;
-      border-radius: var(--radius);
-      font: inherit;
-      width: 100%;
-    }
+        .tagline {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--neon-blue);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
 
-    input:focus,
-    textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
-    }
+        .tagline span {
+            display: inline-block;
+            margin: 0 1rem;
+            animation: glitchText 3s ease-in-out infinite;
+        }
 
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
+        @keyframes glitchText {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+            96% { transform: translate(-2px, -2px); }
+            98% { transform: translate(2px, 2px); }
+        }
 
-    footer {
-      text-align: center;
-      padding: 1.5rem 0;
-      font-size: 0.9rem;
-      color: #666;
-      border-top: 1px solid #eee;
-    }
+        .cta-button,
+        .footer-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--neon-blue);
+            text-decoration: none;
+            border: 2px solid var(--neon-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d1117;
-        --text: #e6edf3;
-        --accent: #58a6ff;
-      }
-      body {
-        background: var(--bg);
-        color: var(--text);
-      }
-      .contact {
-        background: #161b22;
-      }
-      input, textarea {
-        background: #0d1117;
-        color: var(--text);
-        border-color: #30363d;
-      }
-      footer {
-        border-top-color: #222;
-      }
-    }
-  </style>
+        .cta-button::before,
+        .footer-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-blue);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before,
+        .footer-cta:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover,
+        .footer-cta:hover {
+            color: var(--dark-bg);
+            box-shadow: var(--glow);
+        }
+
+        /* Section Styling */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 5rem 1rem;
+            border-top: 1px solid var(--grid-color);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-shadow: var(--glow);
+        }
+
+        .section-header p {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(5, 8, 20, 0.8);
+            border: 2px solid var(--neon-blue);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-orange);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+            border-color: var(--neon-orange);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-shadow: var(--glow);
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .service-description {
+            color: var(--neon-cyan);
+            line-height: 1.8;
+        }
+
+        /* Specialties Grid */
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .specialty-item {
+            padding: 1.5rem;
+            background: rgba(5, 8, 20, 0.6);
+            border-left: 3px solid var(--neon-blue);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .specialty-item:hover {
+            background: rgba(5, 8, 20, 0.9);
+            border-left-color: var(--neon-orange);
+            transform: translateX(10px);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .specialty-checkmark {
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            text-shadow: var(--glow);
+        }
+
+        .specialty-text {
+            color: var(--neon-cyan);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* Training Section */
+        .training-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .training-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .training-name {
+            color: var(--neon-blue);
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(5, 8, 20, 0.6);
+            border: 1px solid var(--neon-blue);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+        }
+
+        .training-name:hover {
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+            border-color: var(--neon-orange);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(5, 8, 20, 0.8);
+            border: 2px solid var(--neon-blue);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--neon-orange);
+            clip-path: polygon(100% 0, 100% 100%, 0 0);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
+            border-color: var(--neon-orange);
+        }
+
+        .testimonial-text {
+            color: var(--neon-cyan);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--grid-color);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--neon-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: var(--glow);
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .author-location {
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            color: var(--neon-orange);
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--neon-orange);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: rgba(5, 8, 20, 0.9);
+            border-top: 2px solid var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--neon-blue);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--glow);
+        }
+
+        .contact-info {
+            display: inline-block;
+            padding: 2rem 3rem;
+            background: rgba(5, 8, 20, 0.8);
+            border: 2px solid var(--neon-blue);
+            margin-top: 2rem;
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        }
+
+        .contact-info h3 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-info a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info a:hover {
+            color: var(--neon-orange);
+            text-shadow: 0 0 20px var(--neon-orange);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker-bg);
+            color: var(--neon-cyan);
+            padding: 3rem 1rem;
+            text-align: center;
+            border-top: 2px solid var(--neon-blue);
+        }
+
+        .footer-logo img {
+            width: 200px;
+            height: auto;
+            filter: drop-shadow(0 0 20px var(--neon-blue));
+            margin-bottom: 2rem;
+        }
+
+        .footer h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--glow);
+        }
+
+        .footer p {
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-cta {
+            padding: 1rem 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .testimonials-grid, .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .training-grid {
+                padding: 0 1rem;
+            }
+
+            .tagline span {
+                display: block;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>SuperFast</h1>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav" id="stickyNav">
+        <img src="https://michelleblakeyoga.com/mby_logo_transparent.png" alt="Michelle Blake Yoga" class="nav-logo">
+        <a href="mailto:michelleblakeyoga@icloud.com" class="nav-cta">Initialize</a>
     </nav>
-  </header>
 
-  <section class="hero">
-    <h2>Build Lightning-Fast Websites</h2>
-    <p>Experience the web at full speed with our ultra-optimized landing page template — no dependencies, no lag, just pure performance.</p>
-    <a href="#contact" class="btn">Get Started</a>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="scanline"></div>
+        
+        <div class="logo-container">
+            <img src="https://michelleblakeyoga.com/mby_logo_transparent.png" alt="Michelle Blake Yoga" class="logo">
+        </div>
+        
+        <h2 class="hero-questions">System Malfunction?</h2>
+        <p class="hero-subtitle">Reboot Your Body</p>
+        <p class="credentials">E-RYT 500 • Remote Access • Private Protocol</p>
+        
+        <div class="tagline">
+            <span>Move.Better</span>
+            <span>Feel.Better</span>
+            <span>Be.Better</span>
+        </div>
+        <a href="#contact" class="cta-button">Initialize Program</a>
+    </section>
 
-  <section id="contact" class="contact">
-    <h3>Contact Us</h3>
-    <p>Have a question or want to get in touch? Fill out the below and we’ll respond quickly.</p>
-    <!-- Replace YOUR_FORM_ENDPOINT with your Formspree or Netlify URL -->
-    <form action="https://formspree.io/f/mwprakod" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="_replyto" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-  </section>
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Core Programs</h2>
+                <p>Adaptive protocols for optimal performance</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧘‍♀️</div>
+                    <h3 class="service-title">Private Sessions</h3>
+                    <p class="service-description">One-on-one personalized yoga tailored specifically to your body's needs and goals</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3 class="service-title">Semi-Private</h3>
+                    <p class="service-description">Small group sessions that provide personalized attention in a supportive community setting</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3 class="service-title">Remote Access</h3>
+                    <p class="service-description">Experience transformative yoga from the comfort of your home via Zoom</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🌟</div>
+                    <h3 class="service-title">Alignment Fix</h3>
+                    <p class="service-description">Specialized techniques to correct alignment and improve your posture</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💆‍♀️</div>
+                    <h3 class="service-title">Pain Protocol</h3>
+                    <p class="service-description">Therapeutic movements designed to alleviate chronic pain and discomfort</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🧘</div>
+                    <h3 class="service-title">Mind Sync</h3>
+                    <p class="service-description">Guided meditation and stress management techniques for inner peace</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    © 2025 Bdhi. All snoofers reserved.
-  </footer>
+    <!-- Specialties Section -->
+    <section class="specialties-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>System Specs</h2>
+                <p>Certified multi-disciplinary protocols</p>
+            </div>
+            
+            <div class="specialties-grid">
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">Adaptive Yoga Protocol</span>
+                </div>
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">Scoliosis & Spondylolisthesis Support</span>
+                </div>
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">Meditation & Breathwork</span>
+                </div>
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">Healing from the Core®</span>
+                </div>
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">Pilates (Mat and Apparatus)</span>
+                </div>
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">Barre & Functional Training</span>
+                </div>
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">MELT Method®</span>
+                </div>
+                <div class="specialty-item">
+                    <span class="specialty-checkmark">▶</span>
+                    <span class="specialty-text">Reiki Master Protocol</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section class="training-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Master Training</h2>
+                <p>Legacy connections established</p>
+            </div>
+            
+            <p class="training-intro">
+                Michelle's unique teaching protocol has evolved through years of multi-disciplinary integration, 
+                establishing direct connections with these masters through intensive hands-on training:
+            </p>
+            
+            <div class="training-grid">
+                <div class="training-name"><b>Yapana® Yoga</b> | <i>Leeann Carey</i></div>
+                <div class="training-name"><b>Viniyoga™</b> | <i>Gary Kraftsow</i></div>
+                <div class="training-name"><b>Healing from the Core®</b> | <i>Suzanne Scurlock-Durana</i></div>
+                <div class="training-name"><b>The MELT Method®</b> | <i>Sue Hitzmann</i></div>
+                <div class="training-name"><b>NeuroKinetic Therapy®</b> | <i>Kim and Herson Garcia</i></div>
+                <div class="training-name"><b>Ashtanga Yoga</b> | <i>Tias Little</i></div>
+                <div class="training-name"><b>Restorative Yoga</b> | <i>Judith Hanson Lasater</i></div>
+                <div class="training-name"><b>Power Yoga</b> | <i>Beryl Bender Birch</i></div>
+                <div class="training-name"><b>Ohashiatsu</b> | <i>Hazel Chung</i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="section-header">
+            <h2>User Reviews</h2>
+            <p>System feedback from the grid</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Michelle Blake Yoga is not just yoga. It's a superior workout for improving your agility, health and overall well-being. I can absolutely guarantee you'll love her classes. Today I cannot imagine not taking her classes that are so vital to your overall well being. Not only physically but mentally, as she closes every class with a meditation segment guided by her mindfulness healing voice.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">KA</div>
+                    <div class="author-info">
+                        <div class="author-name">Kathy A.</div>
+                        <div class="author-location">Fernandina Beach, FL</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Michelle's Yoga instruction and class is without a doubt the best I have ever experienced. She is calm, engaging, knowledgeable and has an uncanny way of turning 100% of attention to the practice. My mind, heart and body feel rejuvenated and calm after her class. She's a 10 across the board!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">TL</div>
+                    <div class="author-info">
+                        <div class="author-name">Tanya L.</div>
+                        <div class="author-location">Alexandria, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">MichelleBlakeYoga is superior to EVERY other yoga class I have taken. She combines a fusion of yoga / Pilates / bodywork / meditation that is tailored to a participant's individual needs in every session. Highly recommend!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">DK</div>
+                    <div class="author-info">
+                        <div class="author-name">Diane K.</div>
+                        <div class="author-location">Falls Church, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">When you join a session with Michelle, she gives everyone her attention and you feel you are important. She worked to help me sit tall and straight. She is courteous, sincere, and she goes out of her way to help answer your questions.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div class="author-info">
+                        <div class="author-name">Sayed M.</div>
+                        <div class="author-location">Springfield, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Michelle has been teaching me yoga and pilates since 2005. I follow her everywhere she goes, because she is a very good teacher—I cannot find anyone that cares about your physical as well as your spiritual the way she does.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MN</div>
+                    <div class="author-info">
+                        <div class="author-name">Mai N.</div>
+                        <div class="author-location">Falls Church, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Michelle is an excellent yoga instructor! She is very knowledgeable about how each move affects the body. She is patient, accommodating, and encouraging. I have learned so much from Michelle over the last year!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">CJ</div>
+                    <div class="author-info">
+                        <div class="author-name">Cheryl J.</div>
+                        <div class="author-location">Winchester, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Michelle helped me strengthen my core and my mind prior to back surgery. This was a tremendous help in my immediate post-op recovery. Now I'm happy to be back in small group sessions and look forward to getting stronger every week!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">NR</div>
+                    <div class="author-info">
+                        <div class="author-name">Natalie R.</div>
+                        <div class="author-location">Arlington, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Yoga practice with Michelle has been an incredible experience. She is knowledgeable, friendly, and creates a community environment where everyone feels comfortable. Her approach is thorough, with great attention to detail.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">GL</div>
+                    <div class="author-info">
+                        <div class="author-name">Grace L.</div>
+                        <div class="author-location">Alexandria, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">I've been taking classes with Michelle for over 5 years. Her classes are fun and always changing, and they have improved my flexibility. She always finds solutions to improve flexibility and function.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">CK</div>
+                    <div class="author-info">
+                        <div class="author-name">Carole K.</div>
+                        <div class="author-location">Falls Church, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Michelle is awesome! Sessions with her are unique and she takes care of any physical issue or pain. Helps you to bring up your immune system and grow your awareness on all levels, body & soul.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JC</div>
+                    <div class="author-info">
+                        <div class="author-name">Juan Carlos O.</div>
+                        <div class="author-location">Alexandria, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">An hour of flow with Michelle Blake leaves me calmer, taller and stronger.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JM</div>
+                    <div class="author-info">
+                        <div class="author-name">Jud M.</div>
+                        <div class="author-location">Alexandria, VA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="star-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">Michelle Blake is a 'body whisperer'. Her level of expertise far exceeds any other fitness professionals I have worked with. No two sessions are completely the same.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SC</div>
+                    <div class="author-info">
+                        <div class="author-name">Sue C.</div>
+                        <div class="author-location">Arlington, VA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <h2>Initialize Your Upgrade</h2>
+        
+        <div class="contact-info">
+            <h3>Connect to the Grid</h3>
+            <a href="mailto:michelleblakeyoga@icloud.com">michelleblakeyoga@icloud.com</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="https://michelleblakeyoga.com/mby_logo_transparent.png" alt="Michelle Blake Yoga">
+        </div>
+        <h3>Ready to Transform?</h3>
+        <p>Join the grid and experience the difference</p>
+        <a href="mailto:michelleblakeyoga@icloud.com" class="footer-cta">Begin Protocol</a>
+        <a href="mailto:michelleblakeyoga@icloud.com" class="cta-button">Begin Protocol</a>
+        <a href="#contact" class="cta-button">Initialize Program</a>
+
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Sticky Navigation
+        const stickyNav = document.getElementById('stickyNav');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                stickyNav.classList.add('visible');
+            } else {
+                stickyNav.classList.remove('visible');
+            }
+        });
+    </script>
 </body>
 </html>
